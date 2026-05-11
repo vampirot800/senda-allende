@@ -1,4 +1,5 @@
-import { Church, Landmark, Trees, Hotel, Palette, ShoppingBag, Map } from "lucide-react";
+import Image from "next/image";
+import { Church, Landmark, Trees, Hotel, Palette, ShoppingBag } from "lucide-react";
 
 const NEARBY = [
   { Icon: Church,      name: "Parroquia de San Miguel Arcángel", distance: "A unos minutos a pie" },
@@ -20,12 +21,15 @@ export default function Location() {
         </div>
         <div className="grid lg:grid-cols-5 gap-10 items-start">
           <div className="lg:col-span-3">
-            <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-stone-200 flex items-center justify-center border border-stone-100">
-              <div className="text-center text-brown/40 p-8">
-                <Map className="w-10 h-10 mx-auto mb-4 text-brown/25" />
-                <p className="font-sans text-xs tracking-widest uppercase mb-2">Mapa de Ubicación</p>
-                <p className="font-sans text-[10px] text-brown/30">Reemplazar con iframe de Google Maps</p>
-              </div>
+            <div className="rounded-3xl overflow-hidden border border-stone-100 shadow-sm">
+              <Image
+                src="/images/mapa-ubicacion.jpg"
+                alt="Mapa de ubicación Senda Allende — San Miguel de Allende"
+                width={1484}
+                height={966}
+                className="w-full h-auto"
+                sizes="(max-width: 1024px) 100vw, 60vw"
+              />
             </div>
           </div>
           <div className="lg:col-span-2 flex flex-col gap-4">
