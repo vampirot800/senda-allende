@@ -1,9 +1,23 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
-import { BedDouble, Bath } from "lucide-react";
-import { MODELS, CONTACT } from "@/data/properties";
+import { BedDouble, Bath, LayoutPanelLeft } from "lucide-react";
+import { MODELS } from "@/data/properties";
+import ModelModal from "./ModelModal";
 
 export default function Models() {
-  const whatsappUrl = `https://wa.me/${CONTACT.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(CONTACT.whatsappMessage)}`;
+  const [activeModel, setActiveModel] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const openModal = (modelIdx: number) => {
+    setActiveModel(modelIdx);
+    setActiveIndex(0);
+  };
+
+  const closeModal = () => {
+    setActiveModel(null);
+    setActiveIndex(0);
+  };
 
   return (
     <section id="models" className="py-24 md:py-32 bg-cream-dark">
@@ -19,7 +33,7 @@ export default function Models() {
         </div>
 
         <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-6">
-          {MODELS.map((model) => (
+          {MODELS.map((model, idx) => (
             <article key={model.id} className="bg-white rounded-3xl overflow-hidden shadow-sm border border-stone-100 hover:shadow-xl hover:border-stone-200 transition-all duration-300 flex flex-col">
               {/* Model image */}
               <div className="relative aspect-[4/3] overflow-hidden bg-stone-100">
@@ -67,15 +81,30 @@ export default function Models() {
                   ))}
                 </div>
 
-                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer"
-                  className="mt-auto w-full text-center px-5 py-3 rounded-full bg-terracotta text-white font-sans text-xs tracking-widest uppercase hover:bg-terracotta-dark transition-colors">
-                  Solicitar Información
-                </a>
+                <button
+                  onClick={() => openModal(idx)}
+                  className="mt-auto w-full flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-terracotta text-terracotta font-sans text-xs tracking-widest uppercase hover:bg-terracotta hover:text-white transition-colors duration-200"
+                >
+                  <LayoutPanelLeft className="w-3.5 h-3.5" />
+                  Ver Modelo
+                </button>
               </div>
             </article>
           ))}
         </div>
       </div>
+
+      {/* Modal */}
+      {activeModel !== null && (
+        <ModelModal
+          modelName={MODELS[activeModel].name}
+          modelTag={MODELS[activeModel].tag}
+          images={MODELS[activeModel].floorPlans}
+          activeIndex={activeIndex}
+          onChangeIndex={setActiveIndex}
+          onClose={closeModal}
+        />
+      )}
     </section>
   );
 }

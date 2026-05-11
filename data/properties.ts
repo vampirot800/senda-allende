@@ -35,14 +35,17 @@ export const GALLERY_IMAGES = [
   { src: "/images/room2.jpg",             alt: "Segunda recámara",                 label: "Recámara 2",         placeholder: false },
 ];
 
-// Models — floor plan images. Using interior renders as visual reference.
-// TODO: Replace with actual architectural floor plan drawings if available.
+// Models — render images + floor plan images per model folder.
+// To add more floor plans later: just add more paths to the floorPlans array.
 export const MODELS = [
   {
     id: "modelo-1", name: "Modelo 1", tag: "1 Recámara",
     bedrooms: 1, bathrooms: 1,
     image: "/images/modelo-1.jpg", placeholder: false,
     description: "Departamento ideal para vivir o invertir. Planta baja con terraza privada y bodega exterior.",
+    floorPlans: [
+      { src: "/images/model1/Modelo1SA.png", alt: "Plano arquitectónico Modelo 1" },
+    ],
     areas: [
       { label: "Área primer nivel",  value: "39.81 m²" },
       { label: "Terraza",            value: "11.10 m²" },
@@ -56,6 +59,9 @@ export const MODELS = [
     bedrooms: 2, bathrooms: 2,
     image: "/images/modelo-2.jpg", placeholder: false,
     description: "Departamento amplio en planta media con bodega exterior. Distribución eficiente y gran iluminación natural.",
+    floorPlans: [
+      { src: "/images/model2/Modelo2SA.png", alt: "Plano arquitectónico Modelo 2" },
+    ],
     areas: [
       { label: "Área primer nivel", value: "71.34 m²" },
       { label: "Terraza",           value: "8.62 m²"  },
@@ -69,6 +75,9 @@ export const MODELS = [
     bedrooms: 2, bathrooms: 2,
     image: "/images/modelo-3.jpg", placeholder: false,
     description: "El más amplio en niveles bajos. Excelente privacidad y terraza al fondo del conjunto.",
+    floorPlans: [
+      { src: "/images/model3/Modelo3SA.png", alt: "Plano arquitectónico Modelo 3" },
+    ],
     areas: [
       { label: "Área primer nivel", value: "73.71 m²" },
       { label: "Terraza",           value: "5.21 m²"  },
@@ -82,6 +91,9 @@ export const MODELS = [
     bedrooms: 2, bathrooms: 2,
     image: "/images/roof2.jpg", placeholder: false,
     description: "Penthouse con rooftop privado, baño en azotea y bodega. Las mejores vistas del conjunto.",
+    floorPlans: [
+      { src: "/images/model4/Modelo4SA.png", alt: "Plano arquitectónico Modelo 4 — Penthouse" },
+    ],
     areas: [
       { label: "Área de planta",    value: "67.44 m²"      },
       { label: "Bodega exterior",   value: "2.52–5.21 m²"  },
