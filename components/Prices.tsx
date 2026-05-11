@@ -67,7 +67,7 @@ export default function Prices() {
             </div>
           ))}
         </div>
-        <p className="mt-12 text-center font-sans text-[11px] text-brown/40 max-w-2xl mx-auto leading-relaxed">Precios en pesos mexicanos, sujetos a disponibilidad y cambios sin previo aviso. El inmueble se encuentra en etapa de construcción. Comisión a asesores: 6%.</p>
+        <p className="mt-12 text-center font-sans text-[11px] text-brown/40 max-w-2xl mx-auto leading-relaxed">Precios en pesos mexicanos, sujetos a disponibilidad y cambios sin previo aviso. El inmueble se encuentra en etapa de construcción.</p>
       </div>
     </section>
   );

@@ -32,7 +32,8 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-12 pt-8 border-t border-white/10">
-          <p className="font-sans text-[10px] text-white/30 leading-relaxed max-w-4xl"><strong className="font-semibold text-white/40">Aviso Legal:</strong> {DISCLAIMER}</p>
+          <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-white/30 mb-3">Aviso Legal</p>
+          <p className="font-sans text-xs text-white/40 leading-relaxed max-w-4xl">{DISCLAIMER}</p>
         </div>
       </div>
       <div className="border-t border-white/5 py-4">

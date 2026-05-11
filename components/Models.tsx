@@ -52,6 +52,9 @@ export default function Models() {
               <div className="p-6 flex flex-col gap-5 flex-1">
                 <div>
                   <h3 className="font-serif text-xl font-light text-brown mb-1">{model.name}</h3>
+                  {model.floorNote && (
+                    <p className="font-sans text-[10px] tracking-wide uppercase text-terracotta/80 mb-1.5">{model.floorNote}</p>
+                  )}
                   <p className="font-sans text-xs text-brown/50 leading-relaxed">{model.description}</p>
                 </div>
 

@@ -23,7 +23,7 @@ export default function Gallery() {
               key={img.src}
               onClick={() => setActive(i)}
               className={`group relative overflow-hidden rounded-2xl bg-stone-200 cursor-pointer transition-transform hover:scale-[1.02] hover:shadow-xl ${
-                i === 0 || i === 5 ? "col-span-2 aspect-video" : "aspect-square"
+                i === 0 || i === 5 ? "col-span-2 aspect-[16/9]" : "aspect-square"
               }`}
             >
               <Image
