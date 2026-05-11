@@ -19,8 +19,8 @@ export default function Location() {
           <h2 className="font-serif text-4xl md:text-5xl font-light text-brown leading-tight mb-6">En el corazón de <em className="text-terracotta">San Miguel</em></h2>
           <p className="font-sans text-brown/70 leading-relaxed">Senda Allende tiene una ubicación privilegiada en el corazón de San Miguel de Allende, a pocas cuadras de la Parroquia de San Miguel Arcángel, cerca del Centro Histórico, galerías, cafés, plazas y los principales referentes del destino.</p>
         </div>
-        <div className="grid lg:grid-cols-5 gap-10 items-start">
-          <div className="lg:col-span-3">
+        <div className="grid lg:grid-cols-3 gap-10 items-start">
+          <div className="lg:col-span-2">
             <div className="rounded-3xl overflow-hidden border border-stone-100 shadow-sm">
               <Image
                 src="/images/mapa-ubicacion.jpg"
@@ -28,11 +28,11 @@ export default function Location() {
                 width={1484}
                 height={966}
                 className="w-full h-auto"
-                sizes="(max-width: 1024px) 100vw, 60vw"
+                sizes="(max-width: 1024px) 100vw, 70vw"
               />
             </div>
           </div>
-          <div className="lg:col-span-2 flex flex-col gap-4">
+          <div className="lg:col-span-1 flex flex-col gap-4">
             <h3 className="font-serif text-2xl font-light text-brown mb-2">Cerca de todo</h3>
             <ul className="space-y-3">
               {NEARBY.map(({ Icon, name, distance }) => (
