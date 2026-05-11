@@ -6,9 +6,9 @@
 
 // TODO: Replace with real contact info
 export const CONTACT = {
-  whatsapp: "+52 415 000 0000",
+  whatsapp: "+52 833 343 1512",
   whatsappMessage: "Hola, me interesa recibir información sobre Senda Allende Residences.",
-  email: "contacto@sendaallende.mx",
+  email: "belinda@remaxglobal.net",
   formspree: "https://formspree.io/f/XXXXXXXX", // ← sign up at formspree.io
 };
 
