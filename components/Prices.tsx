@@ -14,7 +14,7 @@ export default function Prices() {
   const [selectedPayment, setSelectedPayment] = useState(0);
   const floors = Array.from(new Set(UNITS.map((u) => u.floor)));
   const whatsappUrl = (unit: number) =>
-    `https://wa.me/${CONTACT.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(`Hola, me interesa el departamento ${unit} de Senda Allende Residences. ¿Podrían darme más información?`)}`;
+    `https://wa.me/${CONTACT.agents[0].whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(`Hola, me interesa el departamento ${unit} de Senda Allende Residences. ¿Podrían darme más información?`)}`;
 
   return (
     <section id="prices" className="py-24 md:py-32 bg-cream">

@@ -4,12 +4,14 @@
 // All pricing in MXN. Source: Lista Precios Salida Abr 2026 Rev 2.
 // ============================================================
 
-// TODO: Replace with real contact info
 export const CONTACT = {
-  whatsapp: "+52 833 343 1512",
-  whatsappMessage: "Hola, me interesa recibir información sobre Senda Allende Residences.",
-  email: "belinda@remaxglobal.net",
+  email: "info@sendaallende.com.mx",
   formspree: "https://formspree.io/f/XXXXXXXX", // ← sign up at formspree.io
+  whatsappMessage: "Hola, me interesa recibir información sobre Senda Allende Residences.",
+  agents: [
+    { name: "Belinda Villarreal Higuera", whatsapp: "+52 833 343 1512" },
+    { name: "Ana Baumgarten",             whatsapp: "+52 442 219 9333" },
+  ],
 };
 
 export const FEATURES = [

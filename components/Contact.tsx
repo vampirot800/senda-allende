@@ -25,7 +25,8 @@ export default function Contact() {
   const [state, setState]     = useState<FormState>("idle");
   const [honeypot, setHoneypot] = useState(""); // spam trap
 
-  const whatsappUrl = `https://wa.me/${CONTACT.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(CONTACT.whatsappMessage)}`;
+  const whatsappUrl = (phone: string) =>
+    `https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent(CONTACT.whatsappMessage)}`;
 
   const field = (k: keyof typeof EMPTY) => ({
     value: form[k],
@@ -76,18 +77,22 @@ export default function Contact() {
         <div className="grid md:grid-cols-5 gap-10">
           {/* Left — contact info */}
           <div className="md:col-span-2 flex flex-col gap-5">
-            <a
-              href={whatsappUrl} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-4 bg-[#25D366] text-white rounded-2xl p-5 hover:bg-[#1ebe5d] transition-colors shadow-lg shadow-[#25D366]/20"
-            >
-              <svg className="w-6 h-6 flex-shrink-0" viewBox="0 0 32 32" fill="currentColor">
-                <path d="M16 0C7.164 0 0 7.163 0 16a15.93 15.93 0 002.286 8.267L0 32l7.995-2.103A15.953 15.953 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.26 22.637c-.344.965-2.003 1.847-2.737 1.96-.699.106-1.575.15-2.54-.16a22.99 22.99 0 01-2.298-.85c-4.04-1.744-6.676-5.8-6.876-6.066-.2-.267-1.63-2.166-1.63-4.13 0-1.965 1.03-2.93 1.396-3.33.365-.4.795-.5 1.06-.5h.766c.246 0 .58-.093.908.692.344.817 1.163 2.828 1.264 3.032.1.2.168.435.033.7-.133.267-.2.433-.4.666-.2.234-.42.522-.6.7-.2.2-.408.418-.175.817.233.4 1.033 1.7 2.216 2.75 1.52 1.353 2.803 1.773 3.203 1.97.4.2.632.167.866-.1.234-.267 1-1.166 1.267-1.566.267-.4.533-.333.9-.2.366.133 2.33 1.1 2.73 1.3.4.2.666.3.766.466.1.167.1.966-.244 1.932z" />
-              </svg>
-              <div>
-                <p className="font-sans text-xs tracking-widest uppercase mb-0.5 opacity-80">WhatsApp</p>
-                <p className="font-sans font-semibold text-sm">{CONTACT.whatsapp}</p>
-              </div>
-            </a>
+            {CONTACT.agents.map((agent) => (
+              <a
+                key={agent.whatsapp}
+                href={whatsappUrl(agent.whatsapp)} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-4 bg-[#25D366] text-white rounded-2xl p-5 hover:bg-[#1ebe5d] transition-colors shadow-lg shadow-[#25D366]/20"
+              >
+                <svg className="w-6 h-6 flex-shrink-0" viewBox="0 0 32 32" fill="currentColor">
+                  <path d="M16 0C7.164 0 0 7.163 0 16a15.93 15.93 0 002.286 8.267L0 32l7.995-2.103A15.953 15.953 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.26 22.637c-.344.965-2.003 1.847-2.737 1.96-.699.106-1.575.15-2.54-.16a22.99 22.99 0 01-2.298-.85c-4.04-1.744-6.676-5.8-6.876-6.066-.2-.267-1.63-2.166-1.63-4.13 0-1.965 1.03-2.93 1.396-3.33.365-.4.795-.5 1.06-.5h.766c.246 0 .58-.093.908.692.344.817 1.163 2.828 1.264 3.032.1.2.168.435.033.7-.133.267-.2.433-.4.666-.2.234-.42.522-.6.7-.2.2-.408.418-.175.817.233.4 1.033 1.7 2.216 2.75 1.52 1.353 2.803 1.773 3.203 1.97.4.2.632.167.866-.1.234-.267 1-1.166 1.267-1.566.267-.4.533-.333.9-.2.366.133 2.33 1.1 2.73 1.3.4.2.666.3.766.466.1.167.1.966-.244 1.932z" />
+                </svg>
+                <div>
+                  <p className="font-sans text-xs tracking-widest uppercase mb-0.5 opacity-80">WhatsApp</p>
+                  <p className="font-sans font-semibold text-sm">{agent.name}</p>
+                  <p className="font-sans text-xs opacity-70 mt-0.5">{agent.whatsapp}</p>
+                </div>
+              </a>
+            ))}
 
             <a
               href={`mailto:${CONTACT.email}`}
@@ -173,7 +178,7 @@ export default function Contact() {
               {state === "error" && (
                 <p className="mt-3 text-center font-sans text-xs text-red-500">
                   Ocurrió un error al enviar. Por favor escríbenos por{" "}
-                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-red-600">WhatsApp</a>.
+                  <a href={whatsappUrl(CONTACT.agents[0].whatsapp)} target="_blank" rel="noopener noreferrer" className="underline hover:text-red-600">WhatsApp</a>.
                 </p>
               )}
 

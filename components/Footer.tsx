@@ -8,7 +8,6 @@ const NAV_LINKS = [
 ];
 
 export default function Footer() {
-  const whatsappUrl = `https://wa.me/${CONTACT.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(CONTACT.whatsappMessage)}`;
   return (
     <footer className="bg-brown text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-16">
@@ -25,7 +24,11 @@ export default function Footer() {
           <div>
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-gold mb-5">Contacto</p>
             <div className="space-y-3">
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="block font-sans text-xs text-white/50 hover:text-white transition-colors">WhatsApp: {CONTACT.whatsapp}</a>
+              {CONTACT.agents.map((agent) => (
+                <a key={agent.whatsapp} href={`https://wa.me/${agent.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(CONTACT.whatsappMessage)}`} target="_blank" rel="noopener noreferrer" className="block font-sans text-xs text-white/50 hover:text-white transition-colors">
+                  WhatsApp · {agent.name}
+                </a>
+              ))}
               <a href={`mailto:${CONTACT.email}`} className="block font-sans text-xs text-white/50 hover:text-white transition-colors">{CONTACT.email}</a>
               <p className="font-sans text-xs text-white/50">San Miguel de Allende, Guanajuato, México</p>
             </div>
