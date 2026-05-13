@@ -9,7 +9,7 @@ export const CONTACT = {
   formspree: "https://formspree.io/f/XXXXXXXX", // ← sign up at formspree.io
   whatsappMessage: "Hola, me interesa recibir información sobre Senda Allende Residences.",
   agents: [
-    { name: "Belinda Villarreal Higuera", whatsapp: "+52 833 343 1512" },
+    { name: "Belinda Villarreal", whatsapp: "+52 833 343 1512" },
     { name: "Ana Baumgarten",             whatsapp: "+52 442 219 9333" },
   ],
 };
