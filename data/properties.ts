@@ -12,7 +12,7 @@ export const CONTACT = {
   web3formsKey: process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "",
   whatsappMessage: "Hola, me interesa recibir información sobre Senda Allende Residences.",
   agents: [
-    { name: "Belinda Villarreal Higuera", whatsapp: "+52 833 343 1512" },
+    { name: "Belinda Villarreal", whatsapp: "+52 833 343 1512" },
     { name: "Ana Baumgarten",             whatsapp: "+52 442 219 9333" },
   ],
 };
