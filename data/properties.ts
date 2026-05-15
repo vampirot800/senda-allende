@@ -6,10 +6,13 @@
 
 export const CONTACT = {
   email: "info@sendaallende.com.mx",
-  formspree: "https://formspree.io/f/XXXXXXXX", // ← sign up at formspree.io
+  // Web3Forms access key — set this in Vercel: Settings → Environment Variables
+  // Key name: NEXT_PUBLIC_WEB3FORMS_KEY
+  // Get your free key at: https://web3forms.com (enter info@sendaallende.com.mx)
+  web3formsKey: process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "",
   whatsappMessage: "Hola, me interesa recibir información sobre Senda Allende Residences.",
   agents: [
-    { name: "Belinda Villarreal", whatsapp: "+52 833 343 1512" },
+    { name: "Belinda Villarreal Higuera", whatsapp: "+52 833 343 1512" },
     { name: "Ana Baumgarten",             whatsapp: "+52 442 219 9333" },
   ],
 };

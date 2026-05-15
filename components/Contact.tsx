@@ -38,18 +38,27 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Honeypot: bot filled hidden field
-    if (honeypot) return;
+    if (honeypot) return; // bot trap
     const errs = validate(form);
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
     setState("sending");
     try {
-      const res = await fetch(CONTACT.formspree, {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ ...form, _gotcha: honeypot }),
+        body: JSON.stringify({
+          access_key: CONTACT.web3formsKey,          // set NEXT_PUBLIC_WEB3FORMS_KEY in Vercel
+          subject: `Nuevo contacto — ${form.name} · Senda Allende`,
+          from_name: "Senda Allende Residences",
+          name: form.name,
+          email: form.email,
+          phone: form.phone || "No proporcionado",
+          message: form.message,
+          botcheck: honeypot,
+        }),
       });
-      if (res.ok) { setState("success"); setForm(EMPTY); setErrors({}); }
+      const data = await res.json();
+      if (data.success) { setState("success"); setForm(EMPTY); setErrors({}); }
       else setState("error");
     } catch { setState("error"); }
   };
