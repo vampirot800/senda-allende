@@ -2,10 +2,10 @@ import Image from "next/image";
 import { Church, Landmark, Trees, Hotel, Palette, ShoppingBag } from "lucide-react";
 
 const NEARBY = [
-  { Icon: Church,      name: "Parroquia de San Miguel Arcángel", distance: "A unos minutos a pie" },
-  { Icon: Landmark,    name: "Centro Histórico",                  distance: "Caminando" },
-  { Icon: Trees,       name: "Parque Benito Juárez",              distance: "Muy cerca" },
-  { Icon: Hotel,       name: "Rosewood San Miguel",               distance: "Zona inmediata" },
+  { Icon: Church,      name: "Parroquia de San Miguel Arcángel", distance: "900 metros" },
+  { Icon: Landmark,    name: "Centro Histórico",                  distance: "500 metros" },
+  { Icon: Trees,       name: "Parque Benito Juárez",              distance: "1.3 km" },
+  { Icon: Hotel,       name: "Rosewood San Miguel",               distance: "1 km" },
   { Icon: Palette,     name: "Galerías y Cafés",                  distance: "En el entorno" },
   { Icon: ShoppingBag, name: "Plazas y comercios",                distance: "A pasos" },
 ];
