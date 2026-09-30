@@ -10,6 +10,7 @@ export const CONTACT = {
   // Key name: NEXT_PUBLIC_WEB3FORMS_KEY
   // Get your free key at: https://web3forms.com (enter info@sendaallende.com.mx)
   web3formsKey: process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "",
+  address: "Prolongación Del Refugio No. 15, Col. San Antonio, San Miguel de Allende, Guanajuato, México",
   whatsappMessage: "Hola, me interesa recibir información sobre Senda Allende Residences.",
   agents: [
     { name: "Broker Belinda Villarreal", whatsapp: "+52 833 343 1512" },
@@ -143,7 +144,7 @@ export const ROOF_GARDEN = {
 
 export type PaymentOption = { label: string; sublabel: string; price: number };
 export type Unit = {
-  id: number; floor: string; description: string;
+  id: number; modelId: string; floor: string; description: string;
   sqm: number; terrace: number; storage: number;
   bathroomRoof: number; roof: number; totalSqm: number;
   bedrooms: number; bathrooms: number; hasRooftop: boolean;
@@ -153,7 +154,7 @@ export type Unit = {
 
 export const UNITS: Unit[] = [
   {
-    id: 101, floor: "Planta Baja", description: "Fachada · Terraza + Bodega",
+    id: 101, modelId: "modelo-1", floor: "Planta Baja", description: "Fachada · Terraza + Bodega",
     sqm: 39.81, terrace: 11.10, storage: 2.61, bathroomRoof: 0, roof: 0, totalSqm: 53.52,
     bedrooms: 1, bathrooms: 1, hasRooftop: false, status: "available",
     prices: [
@@ -163,7 +164,7 @@ export const UNITS: Unit[] = [
     ],
   },
   {
-    id: 102, floor: "Planta Baja", description: "En Medio · Terraza + Bodega",
+    id: 102, modelId: "modelo-2", floor: "Planta Baja", description: "En Medio · Terraza + Bodega",
     sqm: 71.24, terrace: 8.62, storage: 2.61, bathroomRoof: 0, roof: 0, totalSqm: 82.47,
     bedrooms: 2, bathrooms: 2, hasRooftop: false, status: "available",
     prices: [
@@ -173,7 +174,7 @@ export const UNITS: Unit[] = [
     ],
   },
   {
-    id: 103, floor: "Planta Baja", description: "Fondo · Terraza + Bodega",
+    id: 103, modelId: "modelo-3", floor: "Planta Baja", description: "Fondo · Terraza + Bodega",
     sqm: 73.71, terrace: 5.21, storage: 2.61, bathroomRoof: 0, roof: 0, totalSqm: 81.53,
     bedrooms: 2, bathrooms: 2, hasRooftop: false, status: "available",
     prices: [
@@ -183,7 +184,7 @@ export const UNITS: Unit[] = [
     ],
   },
   {
-    id: 201, floor: "Planta Media", description: "Fachada · Bodega",
+    id: 201, modelId: "modelo-4", floor: "Planta Media", description: "Fachada · Bodega",
     sqm: 67.44, terrace: 0, storage: 2.52, bathroomRoof: 0, roof: 0, totalSqm: 69.96,
     bedrooms: 2, bathrooms: 2, hasRooftop: false, status: "available",
     prices: [
@@ -193,7 +194,7 @@ export const UNITS: Unit[] = [
     ],
   },
   {
-    id: 202, floor: "Planta Media", description: "En Medio · Bodega",
+    id: 202, modelId: "modelo-2", floor: "Planta Media", description: "En Medio · Bodega",
     sqm: 73.21, terrace: 0, storage: 2.62, bathroomRoof: 0, roof: 0, totalSqm: 75.83,
     bedrooms: 2, bathrooms: 2, hasRooftop: false, status: "available",
     prices: [
@@ -203,7 +204,7 @@ export const UNITS: Unit[] = [
     ],
   },
   {
-    id: 203, floor: "Planta Media", description: "Fondo · Bodega",
+    id: 203, modelId: "modelo-3", floor: "Planta Media", description: "Fondo · Bodega",
     sqm: 73.71, terrace: 0, storage: 2.61, bathroomRoof: 0, roof: 0, totalSqm: 76.32,
     bedrooms: 2, bathrooms: 2, hasRooftop: false, status: "available",
     prices: [
@@ -213,7 +214,7 @@ export const UNITS: Unit[] = [
     ],
   },
   {
-    id: 301, floor: "Planta Alta", description: "Fachada · Roof + Bodega + Baño Roof",
+    id: 301, modelId: "modelo-4", floor: "Planta Alta", description: "Fachada · Roof + Bodega + Baño Roof",
     sqm: 67.44, terrace: 0, storage: 5.21, bathroomRoof: 2.52, roof: 34.87, totalSqm: 110.04,
     bedrooms: 2, bathrooms: 2, hasRooftop: true, status: "available",
     prices: [
@@ -223,7 +224,7 @@ export const UNITS: Unit[] = [
     ],
   },
   {
-    id: 302, floor: "Planta Alta", description: "En Medio · Roof + Bodega + Baño Roof",
+    id: 302, modelId: "modelo-2", floor: "Planta Alta", description: "En Medio · Roof + Bodega + Baño Roof",
     sqm: 73.21, terrace: 0, storage: 2.52, bathroomRoof: 2.62, roof: 52.42, totalSqm: 130.77,
     bedrooms: 2, bathrooms: 2, hasRooftop: true, status: "available",
     prices: [
@@ -233,7 +234,7 @@ export const UNITS: Unit[] = [
     ],
   },
   {
-    id: 303, floor: "Planta Alta", description: "Fondo · Roof + Bodega + Baño Roof",
+    id: 303, modelId: "modelo-3", floor: "Planta Alta", description: "Fondo · Roof + Bodega + Baño Roof",
     sqm: 73.71, terrace: 0, storage: 3.22, bathroomRoof: 2.74, roof: 40.93, totalSqm: 120.60,
     bedrooms: 2, bathrooms: 2, hasRooftop: true, status: "available",
     prices: [

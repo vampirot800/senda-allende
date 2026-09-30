@@ -1,5 +1,8 @@
 import Image from "next/image";
-import { Church, Landmark, Trees, Hotel, Palette, ShoppingBag } from "lucide-react";
+import { Church, Landmark, Trees, Hotel, Palette, ShoppingBag, MapPin } from "lucide-react";
+import { CONTACT } from "@/data/properties";
+
+const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CONTACT.address)}`;
 
 const NEARBY = [
   { Icon: Church,      name: "Parroquia de San Miguel Arcángel", distance: "900 metros / 12 miutos caminando" },
@@ -45,6 +48,14 @@ export default function Location() {
                 </li>
               ))}
             </ul>
+            <a
+              href={MAPS_URL} target="_blank" rel="noopener noreferrer"
+              className="mt-2 w-full flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-terracotta text-white font-sans text-xs tracking-widest uppercase hover:bg-terracotta-dark transition-colors duration-200 shadow-lg shadow-terracotta/20"
+            >
+              <MapPin className="w-4 h-4" />
+              Ver en Google Maps
+            </a>
+            <p className="font-sans text-xs text-brown/50 text-center leading-relaxed">{CONTACT.address}</p>
           </div>
         </div>
       </div>

@@ -76,7 +76,7 @@ export default function Contact() {
         <div className="text-center max-w-xl mx-auto mb-14">
           <p className="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-4">Contacto</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light text-brown leading-tight mb-4">
-            Hablemos sobre <em className="text-terracotta">tu inversión</em>
+            Hablemos sobre <em className="text-terracotta">tu inversin</em>
           </h2>
           <p className="font-sans text-brown/60 text-sm leading-relaxed">
             Estamos para resolver tus dudas, agendar una visita o enviar información detallada.
@@ -118,7 +118,7 @@ export default function Contact() {
               <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5 text-terracotta" />
               <div>
                 <p className="font-sans text-xs tracking-widest uppercase text-brown/40 mb-1">Ubicación</p>
-                <p className="font-sans text-sm text-brown leading-relaxed">San Miguel de Allende,<br />Guanajuato, México</p>
+                <p className="font-sans text-sm text-brown leading-relaxed">Prolongación Del Refugio NO. 15, COL. SAN ANTONIO, San Miguel De Allende,<br />Guanajuato, México</p>
               </div>
             </div>
           </div>

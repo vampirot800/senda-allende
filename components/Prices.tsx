@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
-import { UNITS, PAYMENT_CONDITIONS, CONTACT } from "@/data/properties";
+import { LayoutPanelLeft } from "lucide-react";
+import { UNITS, MODELS, PAYMENT_CONDITIONS, CONTACT, type Unit } from "@/data/properties";
+import ModelModal from "./ModelModal";
 
 const FLOOR_LABELS: Record<string, string> = { "Planta Baja": "Nivel 1", "Planta Media": "Nivel 2", "Planta Alta": "Nivel 3 · Penthouse" };
 const STATUS_STYLES: Record<string, string> = { available: "bg-emerald-50 text-emerald-700 border-emerald-200", reserved: "bg-amber-50 text-amber-700 border-amber-200", sold: "bg-red-50 text-red-700 border-red-200" };
@@ -12,6 +14,10 @@ function formatMXN(n: number) {
 
 export default function Prices() {
   const [selectedPayment, setSelectedPayment] = useState(0);
+  const [planUnit, setPlanUnit] = useState<Unit | null>(null);
+  const [planIndex, setPlanIndex] = useState(0);
+  const planModel = planUnit ? MODELS.find((m) => m.id === planUnit.modelId) : undefined;
+  const openPlan = (unit: Unit) => { setPlanUnit(unit); setPlanIndex(0); };
   const floors = Array.from(new Set(UNITS.map((u) => u.floor)));
   const whatsappUrl = (unit: number) =>
     `https://wa.me/${CONTACT.agents[0].whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(`Hola, me interesa el departamento ${unit} de Senda Allende Residences. ¿Podrían darme más información?`)}`;
@@ -43,12 +49,21 @@ export default function Prices() {
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {UNITS.filter((u) => u.floor === floor).map((unit) => (
                   <div key={unit.id} className={`bg-white rounded-2xl p-6 border shadow-sm flex flex-col gap-4 transition-all ${unit.status === "available" ? "border-stone-100 hover:border-terracotta/30 hover:shadow-md" : "border-stone-100 opacity-60"}`}>
-                    <div className="flex items-start justify-between">
+                    <div className="flex items-start justify-between gap-3">
                       <div>
                         <p className="font-serif text-2xl font-light text-brown">Depto. {unit.id}</p>
                         <p className="font-sans text-xs text-brown/50 mt-0.5">{unit.description}</p>
                       </div>
-                      <span className={`font-sans text-[10px] tracking-widest uppercase px-2.5 py-1 rounded-full border ${STATUS_STYLES[unit.status]}`}>{STATUS_LABELS[unit.status]}</span>
+                      <div className="flex flex-col items-end gap-2 flex-shrink-0">
+                        <span className={`font-sans text-[10px] tracking-widest uppercase px-2.5 py-1 rounded-full border ${STATUS_STYLES[unit.status]}`}>{STATUS_LABELS[unit.status]}</span>
+                        <button
+                          onClick={() => openPlan(unit)}
+                          className="flex items-center justify-center gap-1.5 px-3 py-1 whitespace-nowrap rounded-full border border-terracotta text-terracotta font-sans text-[10px] tracking-widest uppercase hover:bg-terracotta hover:text-white transition-colors duration-200"
+                        >
+                          <LayoutPanelLeft className="w-3 h-3" />
+                          Ver Plano
+                        </button>
+                      </div>
                     </div>
                     <div className="flex gap-4 text-brown/50 font-sans text-xs border-t border-stone-50 pt-3">
                       <span>{unit.bedrooms} rec.</span><span>{unit.bathrooms} baños</span><span>{unit.totalSqm} m² total</span>
@@ -70,6 +85,18 @@ export default function Prices() {
         </div>
         <p className="mt-12 text-center font-sans text-[11px] text-brown/40 max-w-2xl mx-auto leading-relaxed">Precios en pesos mexicanos, sujetos a disponibilidad y cambios sin previo aviso. El inmueble se encuentra en etapa de construcción.</p>
       </div>
+
+      {/* Floor plan modal — shows the plan of the unit's model */}
+      {planUnit && planModel && (
+        <ModelModal
+          modelName={`Depto. ${planUnit.id} · ${planModel.name}`}
+          modelTag={planModel.tag}
+          images={planModel.floorPlans}
+          activeIndex={planIndex}
+          onChangeIndex={setPlanIndex}
+          onClose={() => setPlanUnit(null)}
+        />
+      )}
     </section>
   );
 }
