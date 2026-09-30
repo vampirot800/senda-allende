@@ -76,7 +76,7 @@ export default function Contact() {
         <div className="text-center max-w-xl mx-auto mb-14">
           <p className="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-4">Contacto</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light text-brown leading-tight mb-4">
-            Hablemos sobre <em className="text-terracotta">tu residencia</em>
+            Hablemos sobre <em className="text-terracotta">tu inversión</em>
           </h2>
           <p className="font-sans text-brown/60 text-sm leading-relaxed">
             Estamos para resolver tus dudas, agendar una visita o enviar información detallada.

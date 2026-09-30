@@ -30,7 +30,7 @@ export default function Footer() {
                 </a>
               ))}
               <a href={`mailto:${CONTACT.email}`} className="block font-sans text-xs text-white/50 hover:text-white transition-colors">{CONTACT.email}</a>
-              <p className="font-sans text-xs text-white/50">San Miguel de Allende, Guanajuato, México</p>
+              <p className="font-sans text-xs text-white/50">Prolongación Del Refugio NO. 15, COL. SAN ANTONIO, San Miguel De Allende, Guanajuato, México</p>
             </div>
           </div>
         </div>

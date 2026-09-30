@@ -12,8 +12,8 @@ export const CONTACT = {
   web3formsKey: process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "",
   whatsappMessage: "Hola, me interesa recibir información sobre Senda Allende Residences.",
   agents: [
-    { name: "Belinda Villarreal", whatsapp: "+52 833 343 1512" },
-    { name: "Ana Baumgarten",             whatsapp: "+52 442 219 9333" },
+    { name: "Broker Belinda Villarreal", whatsapp: "+52 833 343 1512" },
+    { name: "Broker Ana Baumgarten", whatsapp: "+52 442 219 9333" },
   ],
 };
 
@@ -153,7 +153,7 @@ export type Unit = {
 
 export const UNITS: Unit[] = [
   {
-    id: 101, floor: "Planta Baja", description: "Adelante · Terraza + Bodega",
+    id: 101, floor: "Planta Baja", description: "Fachada · Terraza + Bodega",
     sqm: 39.81, terrace: 11.10, storage: 2.61, bathroomRoof: 0, roof: 0, totalSqm: 53.52,
     bedrooms: 1, bathrooms: 1, hasRooftop: false, status: "available",
     prices: [
@@ -183,7 +183,7 @@ export const UNITS: Unit[] = [
     ],
   },
   {
-    id: 201, floor: "Planta Media", description: "Adelante · Bodega",
+    id: 201, floor: "Planta Media", description: "Fachada · Bodega",
     sqm: 67.44, terrace: 0, storage: 2.52, bathroomRoof: 0, roof: 0, totalSqm: 69.96,
     bedrooms: 2, bathrooms: 2, hasRooftop: false, status: "available",
     prices: [
@@ -213,7 +213,7 @@ export const UNITS: Unit[] = [
     ],
   },
   {
-    id: 301, floor: "Planta Alta", description: "Adelante · Roof + Bodega + Baño Roof",
+    id: 301, floor: "Planta Alta", description: "Fachada · Roof + Bodega + Baño Roof",
     sqm: 67.44, terrace: 0, storage: 5.21, bathroomRoof: 2.52, roof: 34.87, totalSqm: 110.04,
     bedrooms: 2, bathrooms: 2, hasRooftop: true, status: "available",
     prices: [
