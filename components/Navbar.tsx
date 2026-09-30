@@ -35,7 +35,7 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-        <a href="#contact" className={`hidden lg:inline-flex items-center px-5 py-2.5 rounded-full text-xs tracking-widest uppercase font-sans transition-all duration-300 ${scrolled ? "bg-terracotta text-white hover:bg-terracotta-dark" : "bg-white/20 text-white border border-white/40 hover:bg-white/30 backdrop-blur-sm"}`}>Solicitar Info</a>
+        <a href="#contact" className={`hidden lg:inline-flex items-center px-5 py-2.5 rounded-full text-xs tracking-widest uppercase font-sans transition-all duration-300 ${scrolled ? "bg-terracotta text-white hover:bg-terracotta-dark" : "bg-white/20 text-white border border-white/40 hover:bg-white/30 backdrop-blur-sm"}`}>Solicitar Informacion</a>
         <button onClick={() => setMenuOpen(!menuOpen)} className={`lg:hidden p-1 ${scrolled ? "text-brown" : "text-white"}`} aria-label="Abrir menú">
           {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
