@@ -129,6 +129,18 @@ export const MODELS = [
   },
 ];
 
+// Roof Garden — shared rooftop plan, shown via the button below the model cards.
+// Only Nivel 3 units of Modelos 2, 3 y 4 (Deptos. 301, 302, 303) have a private roof.
+export const ROOF_GARDEN = {
+  name: "Roof Garden",
+  tag: "Modelos 2, 3 y 4 · Nivel 3",
+  buttonLabel: "Ver Roof Garden",
+  note: "Exclusivo Modelos 2, 3 y 4 en Nivel 3 · Deptos. 301, 302 y 303",
+  floorPlans: [
+    { src: "/images/roof-garden/PlantaRoofTop.png", alt: "Plano Roof Garden — Deptos. 301, 302 y 303" },
+  ],
+};
+
 export type PaymentOption = { label: string; sublabel: string; price: number };
 export type Unit = {
   id: number; floor: string; description: string;

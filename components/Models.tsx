@@ -1,15 +1,16 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import { BedDouble, Bath, LayoutPanelLeft } from "lucide-react";
-import { MODELS } from "@/data/properties";
+import { BedDouble, Bath, LayoutPanelLeft, Sunset } from "lucide-react";
+import { MODELS, ROOF_GARDEN } from "@/data/properties";
 import ModelModal from "./ModelModal";
 
 export default function Models() {
-  const [activeModel, setActiveModel] = useState<number | null>(null);
+  const [activeModel, setActiveModel] = useState<number | "roof" | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const activePlan = activeModel === "roof" ? ROOF_GARDEN : activeModel !== null ? MODELS[activeModel] : null;
 
-  const openModal = (modelIdx: number) => {
+  const openModal = (modelIdx: number | "roof") => {
     setActiveModel(modelIdx);
     setActiveIndex(0);
   };
@@ -95,14 +96,26 @@ export default function Models() {
             </article>
           ))}
         </div>
+
+        {/* Roof Garden — Nivel 3 of Modelos 2, 3 y 4 only */}
+        <div className="mt-10 flex flex-col items-center gap-3 text-center">
+          <button
+            onClick={() => openModal("roof")}
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-terracotta text-white font-sans text-xs tracking-widest uppercase hover:bg-terracotta-dark transition-colors duration-200 shadow-lg shadow-terracotta/20"
+          >
+            <Sunset className="w-4 h-4" />
+            {ROOF_GARDEN.buttonLabel}
+          </button>
+          <p className="font-sans text-[10px] tracking-wide uppercase text-terracotta/80">{ROOF_GARDEN.note}</p>
+        </div>
       </div>
 
       {/* Modal */}
-      {activeModel !== null && (
+      {activePlan && (
         <ModelModal
-          modelName={MODELS[activeModel].name}
-          modelTag={MODELS[activeModel].tag}
-          images={MODELS[activeModel].floorPlans}
+          modelName={activePlan.name}
+          modelTag={activePlan.tag}
+          images={activePlan.floorPlans}
           activeIndex={activeIndex}
           onChangeIndex={setActiveIndex}
           onClose={closeModal}
