@@ -1,4 +1,4 @@
-import { Gem, UtensilsCrossed, WashingMachine, Wind, ArrowUpDown, Package, Sunset, MapPin } from "lucide-react";
+import { Gem, UtensilsCrossed, WashingMachine, Wind, ArrowUpDown, Package, Sunset, Droplet } from "lucide-react";
 import { FEATURES } from "@/data/properties";
 
 const ICONS: Record<string, React.FC<{ className?: string }>> = {
@@ -9,7 +9,7 @@ const ICONS: Record<string, React.FC<{ className?: string }>> = {
   "Elevador de servicio / carga": (p) => <ArrowUpDown {...p} />,
   "Bodega por departamento":      (p) => <Package {...p} />,
   "Rooftops privados":            (p) => <Sunset {...p} />,
-  "Ubicación privilegiada":       (p) => <MapPin {...p} />,
+  "Filtros de agua":              (p) => <Droplet {...p} />,
 };
 
 export default function Features() {

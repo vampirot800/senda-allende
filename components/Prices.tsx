@@ -22,7 +22,8 @@ export default function Prices() {
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-4">Precios y Disponibilidad</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light text-brown leading-tight mb-6">Inversión desde <em className="text-terracotta">pre-venta</em></h2>
-          <p className="font-sans text-brown/60 text-sm leading-relaxed">Precios en pesos mexicanos (MXN) según lista de salida de abril 2026. Sujeto a disponibilidad.</p>
+          <p className="font-sans text-brown/60 text-sm leading-relaxed">Precios en pesos mexicanos (MXN) según lista de salida de septiembre 2026. Sujeto a disponibilidad.</p>
+          <p className="mt-3 font-sans text-xs tracking-[0.2em] uppercase text-terracotta">Fecha de Entrega Mayo 2028</p>
         </div>
         <div className="flex flex-wrap justify-center gap-3 mb-12">
           {PAYMENT_CONDITIONS.map((cond, i) => (

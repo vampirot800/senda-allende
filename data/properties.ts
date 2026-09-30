@@ -25,7 +25,7 @@ export const FEATURES = [
   { label: "Elevador de servicio / carga" },
   { label: "Bodega por departamento" },
   { label: "Rooftops privados" },
-  { label: "Ubicación privilegiada" },
+  { label: "Filtros de agua" },
 ];
 
 // Gallery — 10 slots. Wide layout at index 0 and 5 (fills 2 columns each).
@@ -81,7 +81,7 @@ export const MODELS = [
       { label: "Bodega exterior",          value: "2.61 m²"  },
       { label: "Total Nivel 1",            value: "82.47 m²", highlight: true },
       { label: "Total Nivel 2",            value: "75.83 m²", highlight: false },
-      { label: "Total Nivel 3 + Rooftop",  value: "130.77 m²", highlight: true },
+      { label: "Total Nivel 3 con Rooftop",  value: "130.77 m²", highlight: true },
     ],
     amenities: ["Cocina equipada", "Zona de lavado", "Aire acondicionado", "Bodega exterior", "Terraza (N1)", "Rooftop Privado (N3)"],
   },
@@ -102,7 +102,7 @@ export const MODELS = [
       { label: "Bodega exterior",          value: "2.61 m²"  },
       { label: "Total Nivel 1",            value: "81.53 m²", highlight: true },
       { label: "Total Nivel 2",            value: "76.32 m²", highlight: false },
-      { label: "Total Nivel 3 + Rooftop",  value: "120.60 m²", highlight: true },
+      { label: "Total Nivel 3 con Rooftop",  value: "120.60 m²", highlight: true },
     ],
     amenities: ["Cocina equipada", "Zona de lavado", "Aire acondicionado", "Bodega exterior", "Terraza (N1)", "Rooftop Privado (N3)"],
   },
@@ -123,7 +123,7 @@ export const MODELS = [
       { label: "Bodega exterior (Nivel 3)", value: "5.21 m²"  },
       { label: "Rooftop + ½ baño (Nivel 3)",value: "37.39 m²" },
       { label: "Total Nivel 2",            value: "69.96 m²", highlight: true },
-      { label: "Total Nivel 3 + Rooftop",  value: "110.04 m²", highlight: true },
+      { label: "Total Nivel 3 con Rooftop",  value: "110.04 m²", highlight: true },
     ],
     amenities: ["Cocina equipada", "Zona de lavado", "Aire acondicionado", "Bodega exterior", "Rooftop Privado (N3)", "½ baño en azotea"],
   },
