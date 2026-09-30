@@ -10,7 +10,7 @@ export const CONTACT = {
   // Key name: NEXT_PUBLIC_WEB3FORMS_KEY
   // Get your free key at: https://web3forms.com (enter info@sendaallende.com.mx)
   web3formsKey: process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "",
-  address: "Prolongación Del Refugio No. 15, Col. San Antonio, San Miguel de Allende, Guanajuato, México",
+  address: "Del Refugio 15, San Antonio, 37750 San Miguel de Allende, Gto.",
   whatsappMessage: "Hola, me interesa recibir información sobre Senda Allende Residences.",
   agents: [
     { name: "Broker Belinda Villarreal", whatsapp: "+52 833 343 1512" },
