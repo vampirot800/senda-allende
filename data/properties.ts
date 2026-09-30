@@ -38,7 +38,7 @@ export const GALLERY_IMAGES = [
   { src: "/images/fachada-noche.png",  alt: "Fachada nocturna del edificio",    label: "Fachada Nocturna",  placeholder: false },
   { src: "/images/sala-1.png",         alt: "Sala de estar con luz natural",    label: "Sala de Estar",     placeholder: false },
   { src: "/images/room2.jpg",          alt: "Segunda recámara",                 label: "Recámara 2",        placeholder: false },
-  { src: "/images/roof1.jpg",          alt: "Vista panorámica desde el rooftop",label: "Vista Rooftop",     placeholder: false },
+  { src: "/images/rooftop-3.png",      alt: "Vista panorámica desde el rooftop",label: "Vista Rooftop",     placeholder: false },
   { src: "/images/rooftop-2.png",      alt: "Rooftop privado al atardecer",     label: "Terraza Privada",   placeholder: false },
 ];
 
