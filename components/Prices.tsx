@@ -67,7 +67,7 @@ export default function Prices() {
                     </div>
                     <div className="flex gap-4 text-brown/50 font-sans text-xs border-t border-stone-50 pt-3">
                       <span>{unit.bedrooms} rec.</span><span>{unit.bathrooms} baños</span><span>{unit.totalSqm} m² total</span>
-                      {unit.hasRooftop && <span className="text-terracotta font-medium">+ Rooftop</span>}
+                      {unit.hasRooftop && <span className="text-terracotta font-medium">con Rooftop</span>}
                     </div>
                     <div className="bg-cream rounded-xl p-4">
                       <p className="font-sans text-[10px] tracking-widest uppercase text-brown/40 mb-1">{PAYMENT_CONDITIONS[selectedPayment].title}</p>
