@@ -3,11 +3,10 @@ import { createContext, useCallback, useContext, useEffect, useState } from "rea
 import type { L } from "@/data/properties";
 
 // Language switch (ES / EN).
-// The page is pre-rendered in Spanish; the visitor's choice is applied in the browser
-// and remembered in localStorage. First-time visitors whose browser is in English get English.
+// The site always loads in Spanish; the ES/EN toggle in the header switches it to English
+// for the current visit.
 
 export type Lang = "es" | "en";
-const STORAGE_KEY = "senda-allende-lang";
 
 type LanguageContextValue = {
   lang: Lang;
@@ -18,21 +17,9 @@ type LanguageContextValue = {
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("es");
-
-  useEffect(() => {
-    let saved: string | null = null;
-    try { saved = localStorage.getItem(STORAGE_KEY); } catch {}
-    if (saved === "es" || saved === "en") setLangState(saved);
-    else if (navigator.language.toLowerCase().startsWith("en")) setLangState("en");
-  }, []);
+  const [lang, setLang] = useState<Lang>("es");
 
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
-
-  const setLang = useCallback((next: Lang) => {
-    setLangState(next);
-    try { localStorage.setItem(STORAGE_KEY, next); } catch {}
-  }, []);
 
   const t = useCallback((text: L) => text[lang], [lang]);
 

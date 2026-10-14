@@ -27,7 +27,7 @@ function LanguageToggle({ light }: { light: boolean }) {
           key={code}
           onClick={() => setLang(code)}
           aria-pressed={lang === code}
-          className={`px-2.5 py-1 rounded-full transition-colors ${
+          className={`px-2.5 py-1 rounded-full uppercase transition-colors ${
             lang === code
               ? light ? "bg-white text-brown" : "bg-terracotta text-white"
               : light ? "text-white/80 hover:text-white" : "text-brown/60 hover:text-terracotta"
