@@ -1,12 +1,15 @@
+"use client";
 import Image from "next/image";
+import { useLang } from "@/lib/i18n";
 
 export default function Hero() {
+  const { t } = useLang();
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Hero background image */}
       <Image
         src="/images/fachada-dia.jpg"
-        alt="Senda Allende Residences — Fachada exterior"
+        alt={t({ es: "Senda Allende Residences — Fachada exterior", en: "Senda Allende Residences — Exterior façade" })}
         fill
         priority
         className="object-cover object-center"
@@ -18,7 +21,7 @@ export default function Hero() {
 
       <div className="relative z-20 text-center px-6 max-w-4xl mx-auto">
         <p className="font-sans text-xs tracking-[0.35em] uppercase text-white/70 mb-6">
-          San Miguel de Allende · Guanajuato · México
+          {t({ es: "San Miguel de Allende · Guanajuato · México", en: "San Miguel de Allende · Guanajuato · Mexico" })}
         </p>
         <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-white leading-tight mb-6">
           Senda Allende<br />
@@ -30,15 +33,17 @@ export default function Hero() {
           <div className="h-px w-16 bg-white/30" />
         </div>
         <p className="font-sans text-base sm:text-lg text-white/80 font-light leading-relaxed mb-10 max-w-xl mx-auto">
-          Residencias boutique en el corazón de San Miguel de Allende.
-          Vida, inversión y experiencia en el destino más valorado de México.
+          {t({
+            es: "Residencias boutique en el corazón de San Miguel de Allende. Vida, inversión y experiencia en el destino más valorado de México.",
+            en: "Boutique residences in the heart of San Miguel de Allende. Living, investment and experience in Mexico's most celebrated destination.",
+          })}
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a href="#models" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-full bg-terracotta text-white font-sans text-xs tracking-widest uppercase hover:bg-terracotta-dark transition-all duration-300 shadow-lg shadow-terracotta/30">
-            Ver Modelos
+            {t({ es: "Ver Modelos", en: "View Models" })}
           </a>
           <a href="#contact" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/40 text-white font-sans text-xs tracking-widest uppercase hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
-            Contáctanos
+            {t({ es: "Contáctanos", en: "Contact Us" })}
           </a>
         </div>
         <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">

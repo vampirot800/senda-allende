@@ -1,32 +1,38 @@
 "use client";
 import { useState } from "react";
 import { Mail, MapPin, CheckCircle } from "lucide-react";
-import { CONTACT } from "@/data/properties";
+import { CONTACT, type L } from "@/data/properties";
+import { useLang } from "@/lib/i18n";
 
 type FormState = "idle" | "sending" | "success" | "error";
-type FieldErrors = { name?: string; email?: string; message?: string };
+type FieldErrors = { name?: boolean; email?: boolean; message?: boolean };
+
+// Stored as flags (not text) so the messages follow the language switch.
+const ERROR_TEXT: Record<keyof FieldErrors, L> = {
+  name:    { es: "Por favor ingresa tu nombre.", en: "Please enter your name." },
+  email:   { es: "Ingresa un correo electrónico válido.", en: "Please enter a valid email address." },
+  message: { es: "El mensaje debe tener al menos 10 caracteres.", en: "Your message must be at least 10 characters long." },
+};
 
 function validate(form: { name: string; email: string; message: string }): FieldErrors {
   const errors: FieldErrors = {};
-  if (!form.name.trim() || form.name.trim().length < 2)
-    errors.name = "Por favor ingresa tu nombre.";
-  if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-    errors.email = "Ingresa un correo electrónico válido.";
-  if (!form.message.trim() || form.message.trim().length < 10)
-    errors.message = "El mensaje debe tener al menos 10 caracteres.";
+  if (!form.name.trim() || form.name.trim().length < 2) errors.name = true;
+  if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errors.email = true;
+  if (!form.message.trim() || form.message.trim().length < 10) errors.message = true;
   return errors;
 }
 
 const EMPTY = { name: "", email: "", phone: "", message: "" };
 
 export default function Contact() {
+  const { t, lang } = useLang();
   const [form, setForm]       = useState(EMPTY);
   const [errors, setErrors]   = useState<FieldErrors>({});
   const [state, setState]     = useState<FormState>("idle");
   const [honeypot, setHoneypot] = useState(""); // spam trap
 
   const whatsappUrl = (phone: string) =>
-    `https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent(CONTACT.whatsappMessage)}`;
+    `https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent(t(CONTACT.whatsappMessage))}`;
 
   const field = (k: keyof typeof EMPTY) => ({
     value: form[k],
@@ -48,11 +54,12 @@ export default function Contact() {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: CONTACT.web3formsKey,          // set NEXT_PUBLIC_WEB3FORMS_KEY in Vercel
-          subject: `Nuevo contacto — ${form.name} · Senda Allende`,
+          subject: `Nuevo contacto — ${form.name} · Senda Allende${lang === "en" ? " (EN)" : ""}`,
           from_name: "Senda Allende Residences",
           name: form.name,
           email: form.email,
           phone: form.phone || "No proporcionado",
+          idioma: lang === "en" ? "Inglés" : "Español",
           message: form.message,
           botcheck: honeypot,
         }),
@@ -63,7 +70,7 @@ export default function Contact() {
     } catch { setState("error"); }
   };
 
-  const inputClass = (err?: string) =>
+  const inputClass = (err?: boolean) =>
     `w-full px-4 py-3 rounded-xl border font-sans text-sm text-brown placeholder-stone-300 focus:outline-none focus:ring-2 transition-all ${
       err
         ? "border-red-300 focus:border-red-400 focus:ring-red-100 bg-red-50/30"
@@ -74,12 +81,15 @@ export default function Contact() {
     <section id="contact" className="py-24 md:py-32 bg-cream-dark">
       <div className="max-w-5xl mx-auto px-6 lg:px-10">
         <div className="text-center max-w-xl mx-auto mb-14">
-          <p className="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-4">Contacto</p>
+          <p className="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-4">{t({ es: "Contacto", en: "Contact" })}</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light text-brown leading-tight mb-4">
-            Hablemos sobre <em className="text-terracotta">tu inversión</em>
+            {t({ es: "Hablemos sobre ", en: "Let's talk about " })}<em className="text-terracotta">{t({ es: "tu inversión", en: "your investment" })}</em>
           </h2>
           <p className="font-sans text-brown/60 text-sm leading-relaxed">
-            Estamos para resolver tus dudas, agendar una visita o enviar información detallada.
+            {t({
+              es: "Estamos para resolver tus dudas, agendar una visita o enviar información detallada.",
+              en: "We're here to answer your questions, schedule a visit or send you detailed information.",
+            })}
           </p>
         </div>
 
@@ -109,7 +119,7 @@ export default function Contact() {
             >
               <Mail className="w-5 h-5 flex-shrink-0 text-terracotta" />
               <div>
-                <p className="font-sans text-xs tracking-widest uppercase text-brown/40 mb-0.5">Correo Electrónico</p>
+                <p className="font-sans text-xs tracking-widest uppercase text-brown/40 mb-0.5">{t({ es: "Correo Electrónico", en: "Email" })}</p>
                 <p className="font-sans text-sm text-brown">{CONTACT.email}</p>
               </div>
             </a>
@@ -117,8 +127,8 @@ export default function Contact() {
             <div className="flex items-start gap-4 bg-white text-brown rounded-2xl p-5 border border-stone-100 shadow-sm">
               <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5 text-terracotta" />
               <div>
-                <p className="font-sans text-xs tracking-widest uppercase text-brown/40 mb-1">Ubicación</p>
-                <p className="font-sans text-sm text-brown leading-relaxed">Prolongación Del Refugio NO. 15, COL. SAN ANTONIO, San Miguel De Allende,<br />Guanajuato, México</p>
+                <p className="font-sans text-xs tracking-widest uppercase text-brown/40 mb-1">{t({ es: "Ubicación", en: "Location" })}</p>
+                <p className="font-sans text-sm text-brown leading-relaxed">Prolongación Del Refugio NO. 15, COL. SAN ANTONIO, San Miguel De Allende,<br />{t({ es: "Guanajuato, México", en: "Guanajuato, Mexico" })}</p>
               </div>
             </div>
           </div>
@@ -136,38 +146,38 @@ export default function Contact() {
 
               <div className="grid sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="block font-sans text-xs tracking-widest uppercase text-brown/50 mb-2">Nombre *</label>
-                  <input type="text" placeholder="Tu nombre" {...field("name")} className={inputClass(errors.name)} />
-                  {errors.name && <p className="mt-1 font-sans text-[11px] text-red-500">{errors.name}</p>}
+                  <label className="block font-sans text-xs tracking-widest uppercase text-brown/50 mb-2">{t({ es: "Nombre *", en: "Name *" })}</label>
+                  <input type="text" placeholder={t({ es: "Tu nombre", en: "Your name" })} {...field("name")} className={inputClass(errors.name)} />
+                  {errors.name && <p className="mt-1 font-sans text-[11px] text-red-500">{t(ERROR_TEXT.name)}</p>}
                 </div>
                 <div>
-                  <label className="block font-sans text-xs tracking-widest uppercase text-brown/50 mb-2">Teléfono</label>
+                  <label className="block font-sans text-xs tracking-widest uppercase text-brown/50 mb-2">{t({ es: "Teléfono", en: "Phone" })}</label>
                   <input type="tel" placeholder="+52 415 000 0000" {...field("phone")} className={inputClass()} />
                 </div>
               </div>
 
               <div className="mb-4">
-                <label className="block font-sans text-xs tracking-widest uppercase text-brown/50 mb-2">Correo Electrónico *</label>
-                <input type="email" placeholder="correo@ejemplo.com" {...field("email")} className={inputClass(errors.email)} />
-                {errors.email && <p className="mt-1 font-sans text-[11px] text-red-500">{errors.email}</p>}
+                <label className="block font-sans text-xs tracking-widest uppercase text-brown/50 mb-2">{t({ es: "Correo Electrónico *", en: "Email *" })}</label>
+                <input type="email" placeholder={t({ es: "correo@ejemplo.com", en: "email@example.com" })} {...field("email")} className={inputClass(errors.email)} />
+                {errors.email && <p className="mt-1 font-sans text-[11px] text-red-500">{t(ERROR_TEXT.email)}</p>}
               </div>
 
               <div className="mb-6">
-                <label className="block font-sans text-xs tracking-widest uppercase text-brown/50 mb-2">Mensaje *</label>
+                <label className="block font-sans text-xs tracking-widest uppercase text-brown/50 mb-2">{t({ es: "Mensaje *", en: "Message *" })}</label>
                 <textarea
-                  rows={4} placeholder="¿Qué modelo te interesa? ¿Tienes alguna pregunta?"
+                  rows={4} placeholder={t({ es: "¿Qué modelo te interesa? ¿Tienes alguna pregunta?", en: "Which model are you interested in? Do you have any questions?" })}
                   value={form.message}
                   onChange={(e) => { setForm((f) => ({ ...f, message: e.target.value })); if (errors.message) setErrors((err) => ({ ...err, message: undefined })); }}
                   className={`${inputClass(errors.message)} resize-none`}
                 />
-                {errors.message && <p className="mt-1 font-sans text-[11px] text-red-500">{errors.message}</p>}
+                {errors.message && <p className="mt-1 font-sans text-[11px] text-red-500">{t(ERROR_TEXT.message)}</p>}
               </div>
 
               {state === "success" ? (
                 <div className="w-full py-5 rounded-2xl bg-emerald-50 border border-emerald-200 flex flex-col items-center gap-2">
                   <CheckCircle className="w-6 h-6 text-emerald-500" />
-                  <p className="font-sans text-sm text-emerald-700 font-medium">Mensaje enviado con éxito.</p>
-                  <p className="font-sans text-xs text-emerald-600">Nos pondremos en contacto contigo pronto.</p>
+                  <p className="font-sans text-sm text-emerald-700 font-medium">{t({ es: "Mensaje enviado con éxito.", en: "Message sent successfully." })}</p>
+                  <p className="font-sans text-xs text-emerald-600">{t({ es: "Nos pondremos en contacto contigo pronto.", en: "We'll be in touch with you soon." })}</p>
                 </div>
               ) : (
                 <button
@@ -180,18 +190,18 @@ export default function Contact() {
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 100 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z" />
                     </svg>
                   )}
-                  {state === "sending" ? "Enviando..." : "Enviar Mensaje"}
+                  {state === "sending" ? t({ es: "Enviando...", en: "Sending..." }) : t({ es: "Enviar Mensaje", en: "Send Message" })}
                 </button>
               )}
 
               {state === "error" && (
                 <p className="mt-3 text-center font-sans text-xs text-red-500">
-                  Ocurrió un error al enviar. Por favor escríbenos por{" "}
+                  {t({ es: "Ocurrió un error al enviar. Por favor escríbenos por", en: "Something went wrong. Please message us on" })}{" "}
                   <a href={whatsappUrl(CONTACT.agents[0].whatsapp)} target="_blank" rel="noopener noreferrer" className="underline hover:text-red-600">WhatsApp</a>.
                 </p>
               )}
 
-              <p className="mt-4 text-center font-sans text-[10px] text-brown/30">* Campos obligatorios</p>
+              <p className="mt-4 text-center font-sans text-[10px] text-brown/30">{t({ es: "* Campos obligatorios", en: "* Required fields" })}</p>
             </form>
           </div>
         </div>

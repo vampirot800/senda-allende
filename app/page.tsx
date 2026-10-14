@@ -8,12 +8,15 @@ import Models   from "@/components/Models";
 import Prices   from "@/components/Prices";
 import Contact  from "@/components/Contact";
 import Footer   from "@/components/Footer";
+import { LanguageProvider } from "@/lib/i18n";
 
 export default function Home() {
   return (
-    <main>
-      <Navbar /><Hero /><About /><Location /><Gallery />
-      <Features /><Models /><Prices /><Contact /><Footer />
-    </main>
+    <LanguageProvider>
+      <main>
+        <Navbar /><Hero /><About /><Location /><Gallery />
+        <Features /><Models /><Prices /><Contact /><Footer />
+      </main>
+    </LanguageProvider>
   );
 }

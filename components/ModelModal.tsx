@@ -2,6 +2,7 @@
 import { useEffect, useCallback } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useLang } from "@/lib/i18n";
 
 export type FloorPlan = { src: string; alt: string };
 
@@ -17,6 +18,7 @@ type Props = {
 export default function ModelModal({
   modelName, modelTag, images, activeIndex, onChangeIndex, onClose,
 }: Props) {
+  const { t } = useLang();
   const hasPrev = activeIndex > 0;
   const hasNext = activeIndex < images.length - 1;
 
@@ -41,13 +43,14 @@ export default function ModelModal({
   }, []);
 
   const current = images[activeIndex];
+  const planTitle = t({ es: "Plano Arquitectónico", en: "Floor Plan" });
 
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
       role="dialog"
       aria-modal="true"
-      aria-label={`Plano arquitectónico ${modelName}`}
+      aria-label={`${planTitle} ${modelName}`}
     >
       {/* Backdrop */}
       <div
@@ -62,12 +65,12 @@ export default function ModelModal({
         <div className="flex items-center justify-between px-6 py-4 border-b border-stone-200 flex-shrink-0">
           <div>
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-terracotta">{modelTag}</p>
-            <h3 className="font-serif text-xl font-light text-brown">{modelName} — Plano Arquitectónico</h3>
+            <h3 className="font-serif text-xl font-light text-brown">{modelName} — {planTitle}</h3>
           </div>
           <button
             onClick={onClose}
             className="p-2 rounded-full hover:bg-stone-200 transition-colors text-brown/60 hover:text-brown"
-            aria-label="Cerrar"
+            aria-label={t({ es: "Cerrar", en: "Close" })}
           >
             <X className="w-5 h-5" />
           </button>
@@ -91,7 +94,7 @@ export default function ModelModal({
             <button
               onClick={prev}
               className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/90 hover:bg-white shadow-md text-brown transition-all hover:scale-110"
-              aria-label="Imagen anterior"
+              aria-label={t({ es: "Imagen anterior", en: "Previous image" })}
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -102,7 +105,7 @@ export default function ModelModal({
             <button
               onClick={next}
               className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/90 hover:bg-white shadow-md text-brown transition-all hover:scale-110"
-              aria-label="Siguiente imagen"
+              aria-label={t({ es: "Siguiente imagen", en: "Next image" })}
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -116,7 +119,7 @@ export default function ModelModal({
               <button
                 key={i}
                 onClick={() => onChangeIndex(i)}
-                aria-label={`Ver plano ${i + 1}`}
+                aria-label={`${t({ es: "Ver plano", en: "View plan" })} ${i + 1}`}
                 className={`w-2 h-2 rounded-full transition-all ${
                   i === activeIndex
                     ? "bg-terracotta scale-125"

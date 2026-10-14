@@ -3,17 +3,19 @@ import { useState } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
 import { GALLERY_IMAGES } from "@/data/properties";
+import { useLang } from "@/lib/i18n";
 
 export default function Gallery() {
+  const { t } = useLang();
   const [active, setActive] = useState<number | null>(null);
 
   return (
     <section id="gallery" className="py-24 md:py-32 bg-cream">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="text-center max-w-xl mx-auto mb-14">
-          <p className="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-4">Galería</p>
+          <p className="font-sans text-xs tracking-[0.3em] uppercase text-terracotta mb-4">{t({ es: "Galería", en: "Gallery" })}</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light text-brown leading-tight">
-            Espacios que <em className="text-terracotta">inspiran</em>
+            {t({ es: "Espacios que ", en: "Spaces that " })}<em className="text-terracotta">{t({ es: "inspiran", en: "inspire" })}</em>
           </h2>
         </div>
 
@@ -28,7 +30,7 @@ export default function Gallery() {
             >
               <Image
                 src={img.src}
-                alt={img.alt}
+                alt={t(img.alt)}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                 sizes={i === 0 || i === 5
@@ -36,7 +38,7 @@ export default function Gallery() {
                   : "(max-width: 768px) 50vw, 25vw"}
               />
               <div className="absolute inset-0 bg-brown/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                <span className="font-sans text-xs tracking-widest uppercase text-white">{img.label}</span>
+                <span className="font-sans text-xs tracking-widest uppercase text-white">{t(img.label)}</span>
               </div>
             </button>
           ))}
@@ -51,7 +53,7 @@ export default function Gallery() {
             <button
               onClick={() => setActive(null)}
               className="absolute top-5 right-5 text-white/70 hover:text-white transition-colors"
-              aria-label="Cerrar"
+              aria-label={t({ es: "Cerrar", en: "Close" })}
             >
               <X className="w-7 h-7" />
             </button>
@@ -61,14 +63,14 @@ export default function Gallery() {
             >
               <Image
                 src={GALLERY_IMAGES[active].src}
-                alt={GALLERY_IMAGES[active].alt}
+                alt={t(GALLERY_IMAGES[active].alt)}
                 fill
                 className="object-cover"
                 sizes="90vw"
               />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-5">
                 <p className="font-sans text-xs tracking-widest uppercase text-white">
-                  {GALLERY_IMAGES[active].label}
+                  {t(GALLERY_IMAGES[active].label)}
                 </p>
               </div>
             </div>
