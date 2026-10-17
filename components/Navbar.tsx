@@ -12,31 +12,37 @@ const NAV_LINKS = [
   { href: "#contact",  label: { es: "Contacto",   en: "Contact" } },
 ];
 
-const LANGS: Lang[] = ["es", "en"];
+const LANG_LABELS: Record<Lang, string> = { es: "Español", en: "English" };
 
+// One switch: clicking anywhere on it flips between Spanish and English.
 function LanguageToggle({ light }: { light: boolean }) {
   const { lang, setLang, t } = useLang();
+  const isEn = lang === "en";
   return (
-    <div
-      role="group"
-      aria-label={t({ es: "Idioma", en: "Language" })}
-      className={`flex items-center rounded-full border p-0.5 font-sans text-[10px] tracking-widest uppercase transition-colors ${light ? "border-white/40 bg-white/10 backdrop-blur-sm" : "border-stone-200 bg-white"}`}
+    <button
+      type="button"
+      role="switch"
+      aria-checked={isEn}
+      aria-label={t({ es: "Cambiar a inglés", en: "Switch to Spanish" })}
+      onClick={() => setLang(isEn ? "es" : "en")}
+      className={`relative grid grid-cols-2 items-center rounded-full border p-0.5 font-sans text-[10px] tracking-wider uppercase cursor-pointer transition-colors ${light ? "border-white/40 bg-white/10 backdrop-blur-sm hover:bg-white/20" : "border-stone-200 bg-white hover:border-terracotta/40"}`}
     >
-      {LANGS.map((code) => (
-        <button
+      {/* Sliding thumb behind the active label */}
+      <span
+        aria-hidden="true"
+        className={`absolute top-0.5 bottom-0.5 left-0.5 w-[calc(50%-2px)] rounded-full transition-transform duration-300 ease-out ${isEn ? "translate-x-full" : "translate-x-0"} ${light ? "bg-white" : "bg-terracotta"}`}
+      />
+      {(["es", "en"] as Lang[]).map((code) => (
+        <span
           key={code}
-          onClick={() => setLang(code)}
-          aria-pressed={lang === code}
-          className={`px-2.5 py-1 rounded-full uppercase transition-colors ${
-            lang === code
-              ? light ? "bg-white text-brown" : "bg-terracotta text-white"
-              : light ? "text-white/80 hover:text-white" : "text-brown/60 hover:text-terracotta"
+          className={`relative z-10 px-2.5 py-1 text-center transition-colors duration-300 ${
+            lang === code ? (light ? "text-brown" : "text-white") : (light ? "text-white/80" : "text-brown/60")
           }`}
         >
-          {code}
-        </button>
+          {LANG_LABELS[code]}
+        </span>
       ))}
-    </div>
+    </button>
   );
 }
 
@@ -66,13 +72,17 @@ export default function Navbar() {
           ))}
         </ul>
         <div className="flex items-center gap-3">
-          <LanguageToggle light={!scrolled} />
+          <div className="hidden sm:block"><LanguageToggle light={!scrolled} /></div>
           <a href="#contact" className={`hidden xl:inline-flex items-center whitespace-nowrap px-5 py-2.5 rounded-full text-xs tracking-widest uppercase font-sans transition-all duration-300 ${scrolled ? "bg-terracotta text-white hover:bg-terracotta-dark" : "bg-white/20 text-white border border-white/40 hover:bg-white/30 backdrop-blur-sm"}`}>{t({ es: "Solicitar Info", en: "Request Info" })}</a>
           <button onClick={() => setMenuOpen(!menuOpen)} className={`lg:hidden p-1 ${scrolled ? "text-brown" : "text-white"}`} aria-label={t({ es: "Abrir menú", en: "Open menu" })}>
             {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </nav>
+      {/* On phones the full-word switch doesn't fit beside the logo, so it gets its own row */}
+      <div className="sm:hidden flex justify-end px-6 -mt-2 pb-3">
+        <LanguageToggle light={!scrolled} />
+      </div>
       {menuOpen && (
         <div className="lg:hidden bg-white/98 backdrop-blur-sm border-t border-stone-100 px-6 py-6">
           <ul className="flex flex-col gap-4">
